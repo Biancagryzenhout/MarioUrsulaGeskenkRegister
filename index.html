@@ -288,15 +288,17 @@
       const name = document.getElementById('buyerName').value.trim();
       if (name && currentGift) {
         currentGift.dataset.bought = "true";
-        // const titleEl = currentGift.querySelector('.gift-title');
-        // titleEl.textContent += ` - ${name}`;
+
+        const titleText = currentGift.querySelector('.gift-title').textContent;
         const listItem = document.createElement('li');
-        listItem.textContent = `${titleEl.textContent}`;
+        listItem.textContent = `${titleText} - ${name}`;
         adminList.appendChild(listItem);
 
         document.getElementById('popup').style.display = 'none';
         document.getElementById('buyerName').value = '';
         document.getElementById('thankyou-popup').style.display = 'flex';
+      }
+    }
         const titleText = currentGift.querySelector('.gift-title').textContent;
         const listItem = document.createElement('li');
         listItem.textContent = `${titleText} - ${name}`;
