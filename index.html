@@ -44,25 +44,6 @@
       font-style: italic;
     }
 
-    .admin-controls {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .admin-controls button {
-      background-color: #908d8b;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .admin-controls button:hover {
-      background-color: #6f6b68;
-    }
-
     .gift-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -142,6 +123,26 @@
       border-radius: 10px;
     }
 
+    .admin-view {
+      margin-top: 40px;
+      background: #eee;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .admin-view h2 {
+      margin-bottom: 15px;
+    }
+
+    .admin-view ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .admin-view li {
+      margin: 5px 0;
+    }
+
     @media (max-width: 1024px) {
       .gift-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -178,20 +179,23 @@
       <p>se Geskenk Register</p>
     </header>
 
-    <div class="admin-controls">
-      <button onclick="resetGifts()">🔄 Herstel Alle Geskenke</button>
-    </div>
-
-    <section class="gift-grid" id="giftGrid">
-      <!-- Gift items injected dynamically -->
+    <section class="gift-grid" id="gift-grid">
+      <!-- Gift items dynamically rendered or included here -->
     </section>
 
     <section class="collage">
       <img src="couplephoto.jpg" alt="Couple Collage">
     </section>
+
+    <section class="admin-view">
+      <h2>🗒️ Gekoopte Geskenke</h2>
+      <ul id="admin-list">
+        <!-- Populated with JS -->
+      </ul>
+    </section>
   </div>
 
-  <div class="popup" id="popup">
+   <div class="popup" id="popup">
     <div class="popup-content" id="popup-content">
       <p>Gaan jy die geskenk vir die twee kry?</p>
       <input type="text" id="buyerName" placeholder="Jou naam...">
@@ -216,51 +220,8 @@
   </div>
 
   <script>
-    const gifts = [
-      { img: "broodblik.jpg", title: "Brood blik swart" },
-      { img: "skoonmaakgoed.jpg", title: "Skoon maak goed" },
-      { img: "handdoeke.jpg", title: "Handdoeke" },
-      { img: "roomys.jpg", title: "Roomys lepel" },
-      { img: "pizzacutter.jpg", title: "Pizza mes" },
-      { img: "chipclips.jpg", title: "Chip clips" },
-      { img: "cuttingboard.jpg", title: "Cutting board" },
-      { img: "horserack.jpg", title: "Horserack" },
-      { img: "afdroograkkie.jpg", title: "Afdroog rakkie" },
-      { img: "braairooster.jpg", title: "Braai rooster" },
-      { img: "sandwichpress.jpg", title: "Sandwich press" },
-      { img: "oondbakstel.jpg", title: "Oond / bak stel" },
-      { img: "rollingpin.jpg", title: "Rolling pin" },
-      { img: "koekmixer.jpg", title: "Koek mixer" },
-      { img: "papbakkies.jpg", title: "Plastic pap bakkies" },
-      { img: "vaddoekke.jpg", title: "Vaddoekke" },
-      { img: "stoflappe.jpg", title: "Stof lappe" },
-      { img: "sponsies.jpg", title: "Sponsies" },
-      { img: "cutlery.jpg", title: "Swart cutlery stel" },
-      { img: "remoteholder.jpg", title: "TV remote holder" },
-      { img: "plasticborde.jpg", title: "Plastic borde" },
-      { img: "tafeldoek.jpg", title: "Tafel doek" },
-      { img: "tuinstel.jpg", title: "Tuin stel" },
-      { img: "tuinslang.jpg", title: "Tuin slang" },
-      { img: "stovecovers.jpg", title: "Stove covers (swart/bruin)" },
-      { img: "airfryer.jpg", title: "Air fryer" },
-      { img: "bakskottel.jpg", title: "Bakskottel" },
-      { img: "piekniek.jpg", title: "Piekniek Mandjie" }
-    ];
-
     let currentGift = null;
-
-    function loadGifts() {
-      const grid = document.getElementById('giftGrid');
-      grid.innerHTML = '';
-      gifts.forEach((gift, index) => {
-        const div = document.createElement('div');
-        div.className = 'gift-item';
-        div.setAttribute('onclick', 'handleGiftClick(this)');
-        div.setAttribute('data-index', index);
-        div.innerHTML = `<img src="${gift.img}"><div class="gift-title">${gift.title}</div>`;
-        grid.appendChild(div);
-      });
-    }
+    const adminList = document.getElementById('admin-list');
 
     function handleGiftClick(element) {
       if (element.dataset.bought === "true") {
@@ -275,28 +236,21 @@
       const name = document.getElementById('buyerName').value.trim();
       if (name && currentGift) {
         currentGift.dataset.bought = "true";
-        currentGift.querySelector('.gift-title').textContent += ` - ${name}`;
+        const titleEl = currentGift.querySelector('.gift-title');
+        titleEl.textContent += ` - ${name}`;
+        const listItem = document.createElement('li');
+        listItem.textContent = `${titleEl.textContent}`;
+        adminList.appendChild(listItem);
+
         document.getElementById('popup').style.display = 'none';
         document.getElementById('buyerName').value = '';
         document.getElementById('thankyou-popup').style.display = 'flex';
       }
     }
 
-    function resetGifts() {
-      const items = document.querySelectorAll('.gift-item');
-      items.forEach(item => {
-        item.dataset.bought = "false";
-        const title = gifts[item.dataset.index].title;
-        item.querySelector('.gift-title').textContent = title;
-      });
-      alert("Alle geskenke is herstel.");
-    }
-
     function closePopup(id) {
       document.getElementById(id).style.display = 'none';
     }
-
-    window.onload = loadGifts;
   </script>
 </body>
 </html>
