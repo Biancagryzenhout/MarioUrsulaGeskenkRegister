@@ -297,6 +297,7 @@
         document.getElementById('popup').style.display = 'none';
         document.getElementById('buyerName').value = '';
         document.getElementById('thankyou-popup').style.display = 'flex';
+        saveGiftsToLocalStorage();
       }
     }
         const titleText = currentGift.querySelector('.gift-title').textContent;
@@ -324,6 +325,34 @@
     function openLoginPopup() {
   document.getElementById('login-popup').style.display = 'flex';
 }
-  </script>
+  function saveGiftsToLocalStorage() {
+  const gifts = Array.from(document.querySelectorAll('.gift-item')).map(item => {
+    return {
+      title: item.querySelector('.gift-title').textContent,
+      bought: item.dataset.bought || "false"
+    };
+  });
+  localStorage.setItem('giftList', JSON.stringify(gifts));
+}
+
+function loadGiftsFromLocalStorage() {
+  const stored = localStorage.getItem('giftList');
+  if (stored) {
+    const gifts = JSON.parse(stored);
+    const giftElements = document.querySelectorAll('.gift-item');
+    gifts.forEach((gift, index) => {
+      if (gift.bought === "true") {
+        giftElements[index].dataset.bought = "true";
+        giftElements[index].querySelector('.gift-title').textContent = gift.title;
+      }
+    });
+  }
+}
+
+window.onload = function () {
+  loadGiftsFromLocalStorage();
+};
+
+</script>
 </body>
 </html>
