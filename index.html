@@ -108,6 +108,7 @@
       text-align: center;
       max-width: 300px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      position: relative;
     }
 
     .popup-content input {
@@ -121,6 +122,17 @@
       max-width: 100%;
       margin-top: 15px;
       border-radius: 10px;
+    }
+
+    .popup-content .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #666;
     }
 
     .admin-view {
@@ -189,14 +201,13 @@
 
     <section class="admin-view">
       <h2>🗒️ Gekoopte Geskenke</h2>
-      <ul id="admin-list">
-        <!-- Populated with JS -->
-      </ul>
+      <ul id="admin-list"></ul>
     </section>
   </div>
 
-   <div class="popup" id="popup">
+  <div class="popup" id="popup">
     <div class="popup-content" id="popup-content">
+      <button class="close-btn" onclick="closePopup('popup')">✕</button>
       <p>Gaan jy die geskenk vir die twee kry?</p>
       <input type="text" id="buyerName" placeholder="Jou naam...">
       <button onclick="markAsBought()">Ja, ek gaan of het alklaar</button>
@@ -205,17 +216,17 @@
 
   <div class="popup" id="thankyou-popup">
     <div class="popup-content">
+      <button class="close-btn" onclick="closePopup('thankyou-popup')">✕</button>
       <img src="Baiedankie.jpg" alt="Baie Dankie">
       <p>Dankie vir jou bydrae!</p>
-      <button onclick="closePopup('thankyou-popup')">Maak toe</button>
     </div>
   </div>
 
   <div class="popup" id="already-popup">
     <div class="popup-content">
+      <button class="close-btn" onclick="closePopup('already-popup')">✕</button>
       <img src="klaar.jpg" alt="Reeds gekoop">
       <p>Iemand het hierdie reeds gekoop!</p>
-      <button onclick="closePopup('already-popup')">Okay</button>
     </div>
   </div>
 
