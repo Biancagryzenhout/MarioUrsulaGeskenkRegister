@@ -44,6 +44,25 @@
       font-style: italic;
     }
 
+    .admin-controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .admin-controls button {
+      background-color: #908d8b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .admin-controls button:hover {
+      background-color: #6f6b68;
+    }
+
     .gift-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -159,35 +178,12 @@
       <p>se Geskenk Register</p>
     </header>
 
-    <section class="gift-grid">
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="broodblik.jpg"><div class="gift-title">Brood blik swart</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="skoonmaakgoed.jpg"><div class="gift-title">Skoon maak goed</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="handdoeke.jpg"><div class="gift-title">Handdoeke</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="roomys.jpg"><div class="gift-title">Roomys lepel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="pizzacutter.jpg"><div class="gift-title">Pizza mes</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="chipclips.jpg"><div class="gift-title">Chip clips</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="cuttingboard.jpg"><div class="gift-title">Cutting board</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="horserack.jpg"><div class="gift-title">Horserack</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="afdroograkkie.jpg"><div class="gift-title">Afdroog rakkie</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="braairooster.jpg"><div class="gift-title">Braai rooster</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="sandwichpress.jpg"><div class="gift-title">Sandwich press</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="oondbakstel.jpg"><div class="gift-title">Oond / bak stel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="rollingpin.jpg"><div class="gift-title">Rolling pin</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="koekmixer.jpg"><div class="gift-title">Koek mixer</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="papbakkies.jpg"><div class="gift-title">Plastic pap bakkies</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="vaddoekke.jpg"><div class="gift-title">Vaddoekke</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="stoflappe.jpg"><div class="gift-title">Stof lappe</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="sponsies.jpg"><div class="gift-title">Sponsies</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="cutlery.jpg"><div class="gift-title">Swart cutlery stel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="remoteholder.jpg"><div class="gift-title">TV remote holder</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="plasticborde.jpg"><div class="gift-title">Plastic borde</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="tafeldoek.jpg"><div class="gift-title">Tafel doek</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="tuinstel.jpg"><div class="gift-title">Tuin stel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="tuinslang.jpg"><div class="gift-title">Tuin slang</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="stovecovers.jpg"><div class="gift-title">Stove covers (swart/bruin)</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="airfryer.jpg"><div class="gift-title">Air fryer</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="bakskottel.jpg"><div class="gift-title">Bakskottel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="piekniek.jpg"><div class="gift-title">Piekniek Mandjie</div></div>
+    <div class="admin-controls">
+      <button onclick="resetGifts()">🔄 Herstel Alle Geskenke</button>
+    </div>
+
+    <section class="gift-grid" id="giftGrid">
+      <!-- Gift items injected dynamically -->
     </section>
 
     <section class="collage">
@@ -220,7 +216,51 @@
   </div>
 
   <script>
+    const gifts = [
+      { img: "broodblik.jpg", title: "Brood blik swart" },
+      { img: "skoonmaakgoed.jpg", title: "Skoon maak goed" },
+      { img: "handdoeke.jpg", title: "Handdoeke" },
+      { img: "roomys.jpg", title: "Roomys lepel" },
+      { img: "pizzacutter.jpg", title: "Pizza mes" },
+      { img: "chipclips.jpg", title: "Chip clips" },
+      { img: "cuttingboard.jpg", title: "Cutting board" },
+      { img: "horserack.jpg", title: "Horserack" },
+      { img: "afdroograkkie.jpg", title: "Afdroog rakkie" },
+      { img: "braairooster.jpg", title: "Braai rooster" },
+      { img: "sandwichpress.jpg", title: "Sandwich press" },
+      { img: "oondbakstel.jpg", title: "Oond / bak stel" },
+      { img: "rollingpin.jpg", title: "Rolling pin" },
+      { img: "koekmixer.jpg", title: "Koek mixer" },
+      { img: "papbakkies.jpg", title: "Plastic pap bakkies" },
+      { img: "vaddoekke.jpg", title: "Vaddoekke" },
+      { img: "stoflappe.jpg", title: "Stof lappe" },
+      { img: "sponsies.jpg", title: "Sponsies" },
+      { img: "cutlery.jpg", title: "Swart cutlery stel" },
+      { img: "remoteholder.jpg", title: "TV remote holder" },
+      { img: "plasticborde.jpg", title: "Plastic borde" },
+      { img: "tafeldoek.jpg", title: "Tafel doek" },
+      { img: "tuinstel.jpg", title: "Tuin stel" },
+      { img: "tuinslang.jpg", title: "Tuin slang" },
+      { img: "stovecovers.jpg", title: "Stove covers (swart/bruin)" },
+      { img: "airfryer.jpg", title: "Air fryer" },
+      { img: "bakskottel.jpg", title: "Bakskottel" },
+      { img: "piekniek.jpg", title: "Piekniek Mandjie" }
+    ];
+
     let currentGift = null;
+
+    function loadGifts() {
+      const grid = document.getElementById('giftGrid');
+      grid.innerHTML = '';
+      gifts.forEach((gift, index) => {
+        const div = document.createElement('div');
+        div.className = 'gift-item';
+        div.setAttribute('onclick', 'handleGiftClick(this)');
+        div.setAttribute('data-index', index);
+        div.innerHTML = `<img src="${gift.img}"><div class="gift-title">${gift.title}</div>`;
+        grid.appendChild(div);
+      });
+    }
 
     function handleGiftClick(element) {
       if (element.dataset.bought === "true") {
@@ -242,9 +282,21 @@
       }
     }
 
+    function resetGifts() {
+      const items = document.querySelectorAll('.gift-item');
+      items.forEach(item => {
+        item.dataset.bought = "false";
+        const title = gifts[item.dataset.index].title;
+        item.querySelector('.gift-title').textContent = title;
+      });
+      alert("Alle geskenke is herstel.");
+    }
+
     function closePopup(id) {
       document.getElementById(id).style.display = 'none';
     }
+
+    window.onload = loadGifts;
   </script>
 </body>
 </html>
