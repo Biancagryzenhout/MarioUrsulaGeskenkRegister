@@ -58,12 +58,6 @@
       text-align: center;
       padding: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .gift-item:hover {
-      transform: scale(1.03);
     }
 
     .gift-item img {
@@ -87,102 +81,6 @@
       border-radius: 12px;
       margin-top: 20px;
     }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.6);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .popup-content {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 300px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      position: relative;
-    }
-
-    .popup-content input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 10px;
-      margin-bottom: 15px;
-    }
-
-    .popup img {
-      max-width: 100%;
-      margin-top: 15px;
-      border-radius: 10px;
-    }
-
-    .popup-content .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: transparent;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      color: #666;
-    }
-
-    .admin-view {
-      margin-top: 40px;
-      background: #eee;
-      padding: 20px;
-      border-radius: 10px;
-      display: none;
-    }
-
-    .admin-view h2 {
-      margin-bottom: 15px;
-    }
-
-    .admin-view ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .admin-view li {
-      margin: 5px 0;
-    }
-
-    @media (max-width: 1024px) {
-      .gift-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2em;
-      }
-      header p {
-        font-size: 1em;
-      }
-      .gift-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .frame {
-        padding: 20px;
-        border-width: 4px;
-      }
-      .gift-grid {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
@@ -192,167 +90,17 @@
       <p>se Geskenk Register</p>
     </header>
 
-    <section class="gift-grid" id="gift-grid">
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="broodblik.jpg" alt="Brood blik"><div class="gift-title">Brood blik swart</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="skoonmaakgoed.jpg" alt="Skoon maak goed"><div class="gift-title">Skoon maak goed</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="handdoeke.jpg" alt="Handdoeke"><div class="gift-title">Handdoeke</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="roomys.jpg" alt="Roomys lepel"><div class="gift-title">Roomys lepel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="pizzacutter.jpg" alt="Pizza mes"><div class="gift-title">Pizza mes</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="chipclips.jpg" alt="Chip clips"><div class="gift-title">Chip clips</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="cuttingboard.jpg" alt="Cutting board"><div class="gift-title">Cutting board</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="horserack.jpg" alt="Horserack"><div class="gift-title">Horserack</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="afdroograkkie.jpg" alt="Afdroog rakkie"><div class="gift-title">Afdroog rakkie</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="braairooster.jpg" alt="Braai rooster"><div class="gift-title">Braai rooster</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="sandwichpress.jpg" alt="Sandwich press"><div class="gift-title">Sandwich press</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="oondbakstel.jpg" alt="Oond / bak stel"><div class="gift-title">Oond / bak stel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="rollingpin.jpg" alt="Rolling pin"><div class="gift-title">Rolling pin</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="koekmixer.jpg" alt="Koek mixer"><div class="gift-title">Koek mixer</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="papbakkies.jpg" alt="Plastic pap bakkies"><div class="gift-title">Plastic pap bakkies</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="vaddoekke.jpg" alt="Vaddoekke"><div class="gift-title">Vaddoekke</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="stoflappe.jpg" alt="Stof lappe"><div class="gift-title">Stof lappe</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="sponsies.jpg" alt="Sponsies"><div class="gift-title">Sponsies</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="cutlery.jpg" alt="Cutlery stel"><div class="gift-title">Swart cutlery stel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="remoteholder.jpg" alt="TV remote holder"><div class="gift-title">TV remote holder</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="plasticborde.jpg" alt="Plastic borde"><div class="gift-title">Plastic borde</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="tafeldoek.jpg" alt="Tafel doek"><div class="gift-title">Tafel doek</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="tuinstel.jpg" alt="Tuin stel"><div class="gift-title">Tuin stel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="tuinslang.jpg" alt="Tuin slang"><div class="gift-title">Tuin slang</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="stovecovers.jpg" alt="Stove covers"><div class="gift-title">Stove covers (swart/bruin)</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="airfryer.jpg" alt="Air fryer"><div class="gift-title">Air fryer</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="bakskottel.jpg" alt="Bakskottel"><div class="gift-title">Bakskottel</div></div>
-      <div class="gift-item" onclick="handleGiftClick(this)"><img src="piekniek.jpg" alt="Piekniek Mandjie"><div class="gift-title">Piekniek Mandjie</div></div>
+    <section class="gift-grid">
+      <div class="gift-item"><img src="broodblik.jpg" alt="Broodblik"><div class="gift-title">Brood blik swart</div></div>
+      <div class="gift-item"><img src="skoonmaakgoed.jpg" alt="Skoonmaak goed"><div class="gift-title">Skoon maak goed</div></div>
+      <div class="gift-item"><img src="handdoeke.jpg" alt="Handdoeke"><div class="gift-title">Handdoeke</div></div>
+      <div class="gift-item"><img src="roomys.jpg" alt="Roomys lepel"><div class="gift-title">Roomys lepel</div></div>
+      <div class="gift-item"><img src="pizzacutter.jpg" alt="Pizza mes"><div class="gift-title">Pizza mes</div></div>
     </section>
 
     <section class="collage">
       <img src="couplephoto.jpg" alt="Couple Collage">
     </section>
-
-    <section class="admin-view" id="admin-view">
-      <h2>🗒️ Gekoopte Geskenke</h2>
-      <ul id="admin-list"></ul>
-    </section>
-
-    <div style="text-align: center; margin-top: 40px;">
-      <button onclick="openLoginPopup()" style="background-color: #908d8b; color: white; padding: 10px 20px; font-size: 1em; border: none; border-radius: 8px; cursor: pointer;">👀 Admin: Sien wie het wat gekoop</button>
-    </div>
   </div>
-
-  <div class="popup" id="popup">
-    <div class="popup-content" id="popup-content">
-      <button class="close-btn" onclick="closePopup('popup')">✕</button>
-      <p>Gaan jy die geskenk vir die twee kry?</p>
-      <input type="text" id="buyerName" placeholder="Jou naam...">
-      <button onclick="markAsBought()">Ja, ek gaan of het alklaar</button>
-    </div>
-  </div>
-
-  <div class="popup" id="thankyou-popup">
-    <div class="popup-content">
-      <button class="close-btn" onclick="closePopup('thankyou-popup')">✕</button>
-      <img src="Baiedankie.jpg" alt="Baie Dankie">
-      <p>Dankie vir jou bydrae!</p>
-    </div>
-  </div>
-
-  <div class="popup" id="already-popup">
-    <div class="popup-content">
-      <button class="close-btn" onclick="closePopup('already-popup')">✕</button>
-      <img src="klaar.jpg" alt="Reeds gekoop">
-      <p>Iemand het hierdie reeds gekoop!</p>
-    </div>
-  </div>
-
-  <div class="popup" id="login-popup">
-    <div class="popup-content">
-      <button class="close-btn" onclick="closePopup('login-popup')">✕</button>
-      <p>Voer admin wagwoord in:</p>
-      <input type="password" id="adminPassword" placeholder="Wagwoord...">
-      <button onclick="checkAdminPassword()">Login</button>
-    </div>
-  </div>
-
-  <script>
-    let currentGift = null;
-    const adminList = document.getElementById('admin-list');
-
-    function handleGiftClick(element) {
-      if (element.dataset.bought === "true") {
-        document.getElementById('already-popup').style.display = 'flex';
-      } else {
-        currentGift = element;
-        document.getElementById('popup').style.display = 'flex';
-      }
-    }
-
-    function markAsBought() {
-      const name = document.getElementById('buyerName').value.trim();
-      if (name && currentGift) {
-        currentGift.dataset.bought = "true";
-
-        const titleText = currentGift.querySelector('.gift-title').textContent;
-        const listItem = document.createElement('li');
-        listItem.textContent = `${titleText} - ${name}`;
-        adminList.appendChild(listItem);
-
-        document.getElementById('popup').style.display = 'none';
-        document.getElementById('buyerName').value = '';
-        document.getElementById('thankyou-popup').style.display = 'flex';
-        saveGiftsToLocalStorage();
-      }
-    }
-        const titleText = currentGift.querySelector('.gift-title').textContent;
-        const listItem = document.createElement('li');
-        listItem.textContent = `${titleText} - ${name}`;
-        adminList.appendChild(listItem);
-      }
-    }
-
-    function closePopup(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-
-    function checkAdminPassword() {
-      const input = document.getElementById('adminPassword').value.trim();
-      if (input === 'geskenk2025') {
-        document.getElementById('admin-view').style.display = 'block';
-        closePopup('login-popup');
-      } else {
-        alert('Verkeerde wagwoord. Probeer weer.');
-      }
-    }
-
-    // Optional: Open login prompt on page load (or add a button to trigger it)
-    function openLoginPopup() {
-  document.getElementById('login-popup').style.display = 'flex';
-}
-  function saveGiftsToLocalStorage() {
-  const gifts = Array.from(document.querySelectorAll('.gift-item')).map(item => {
-    return {
-      title: item.querySelector('.gift-title').textContent,
-      bought: item.dataset.bought || "false"
-    };
-  });
-  localStorage.setItem('giftList', JSON.stringify(gifts));
-}
-
-function loadGiftsFromLocalStorage() {
-  const stored = localStorage.getItem('giftList');
-  if (stored) {
-    const gifts = JSON.parse(stored);
-    const giftElements = document.querySelectorAll('.gift-item');
-    gifts.forEach((gift, index) => {
-      if (gift.bought === "true") {
-        giftElements[index].dataset.bought = "true";
-        giftElements[index].querySelector('.gift-title').textContent = gift.title;
-      }
-    });
-  }
-}
-
-window.onload = function () {
-  loadGiftsFromLocalStorage();
-};
-
-</script>
 </body>
 </html>
