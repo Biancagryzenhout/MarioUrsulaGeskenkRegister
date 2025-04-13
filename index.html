@@ -81,13 +81,42 @@
       border-radius: 12px;
       margin-top: 20px;
     }
+
+    @media (max-width: 1024px) {
+      .gift-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+      header p {
+        font-size: 1em;
+      }
+      .gift-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .frame {
+        padding: 20px;
+        border-width: 4px;
+      }
+      .gift-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="frame">
     <header>
       <h1>MARIO & URSULA</h1>
-      <p>se Geskenk Register</p>
+      <p>se</p>
+      <p>Geskenk Register</p>
     </header>
 
     <section class="gift-grid">
