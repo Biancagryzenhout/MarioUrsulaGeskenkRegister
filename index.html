@@ -226,34 +226,12 @@
       <img src="couplephoto.jpg" alt="Couple Collage">
     </section>
 
-    <section class="admin-view">
-      <h2>🗒️ Gekoopte Geskenke</h2>
-      <ul id="admin-list"></ul>
-    </section>
-  </div>
-
-  <div class="popup" id="popup">
-    <div class="popup-content" id="popup-content">
-      <button class="close-btn" onclick="closePopup('popup')">✕</button>
-      <p>Gaan jy die geskenk vir die twee kry?</p>
-      <input type="text" id="buyerName" placeholder="Jou naam...">
-      <button onclick="markAsBought()">Ja, ek gaan of het alklaar</button>
-    </div>
-  </div>
-
-  <div class="popup" id="thankyou-popup">
+  <div class="popup" id="login-popup">
     <div class="popup-content">
-      <button class="close-btn" onclick="closePopup('thankyou-popup')">✕</button>
-      <img src="Baiedankie.jpg" alt="Baie Dankie">
-      <p>Dankie vir jou bydrae!</p>
-    </div>
-  </div>
-
-  <div class="popup" id="already-popup">
-    <div class="popup-content">
-      <button class="close-btn" onclick="closePopup('already-popup')">✕</button>
-      <img src="klaar.jpg" alt="Reeds gekoop">
-      <p>Iemand het hierdie reeds gekoop!</p>
+      <button class="close-btn" onclick="closePopup('login-popup')">✕</button>
+      <p>Voer admin wagwoord in:</p>
+      <input type="password" id="adminPassword" placeholder="Wagwoord...">
+      <button onclick="checkAdminPassword()">Login</button>
     </div>
   </div>
 
@@ -289,6 +267,21 @@
     function closePopup(id) {
       document.getElementById(id).style.display = 'none';
     }
+
+    function checkAdminPassword() {
+      const input = document.getElementById('adminPassword').value.trim();
+      if (input === 'geskenk2025') {
+        document.getElementById('admin-view').style.display = 'block';
+        closePopup('login-popup');
+      } else {
+        alert('Verkeerde wagwoord. Probeer weer.');
+      }
+    }
+
+    // Optional: Open login prompt on page load (or add a button to trigger it)
+    window.onload = function () {
+      document.getElementById('login-popup').style.display = 'flex';
+    };
   </script>
 </body>
 </html>
